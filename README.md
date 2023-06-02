@@ -113,6 +113,13 @@ average performance of all SVM binary classifier models. Implementation
 calculated these metrics using the functions given in the boilerplate
 code structure of the assignment.
 
+## Configuration And Installation
+
+To download and install the required dependencies, follow these steps:\
+`git clone https://github.com/prnv28/Support-Vector-Machines.git`\
+`cd Support-Vector-Machines`\
+`pip install -r requirements.txt`
+
 # Results and Analysis
 
 ## PCA
