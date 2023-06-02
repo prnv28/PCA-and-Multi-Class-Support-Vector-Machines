@@ -57,7 +57,8 @@ $$\\min\_{w,b} \\frac{1}{2} \|\|w\|\|^2 + C \\sum\_{i=1}^n \\max\\{0, 1 - y_i(w^
   
 where *C* is a hyperparameter that controls the trade-off between
 maximizing the margin and minimizing the classification error, and the
-hinge loss function
+<!-- hinge loss function
+$$\\sum\_{i=1}^n \\max\\{0, 1 - y_i(w^Tx_i + b)\\}$$ -->
 max {0, 1 − *y*<sub>*i*</sub>(*w*<sup>*T*</sup>*x*<sub>*i*</sub>+*b*)}
 penalizes points that are misclassified or lie within the margin.
 
@@ -67,14 +68,15 @@ optimize the objective function.initialized the weight vector and bias
 term to zeros and updated them using the gradient of the objective
 function concerning the weight vector and bias term at each step using
 below updation rule for *w* and *b*.
-
-*w* = *w* − *α* \* (*w*−*C*\**y*<sub>*i*</sub>\**x*<sub>*i*</sub>)
-*b* = *b* + *α* \* (*C*\**y*<sub>*i*</sub>)
+$$w = w - \alpha * (w - C * y_i * x_i)$$
+$$b = b + \alpha * (C * y_i)$$
+<!-- *w* = *w* − *α* \* (*w*−*C*\**y*<sub>*i*</sub>\**x*<sub>*i*</sub>)
+*b* = *b* + *α* \* (*C*\**y*<sub>*i*</sub>) -->
 
   
-In the above equations (3) and (4) *α* is a learning rate which is the
+In the above equations *α* is a learning rate which is the
 hyperparameter.  
-In implementation, Used various learning rates, C parameters, and
+In implementation, Used various learning rates, *C* parameters, and
 iterations to train the model.
 
 ## Experimental Setup
@@ -116,9 +118,7 @@ code structure of the assignment.
 ## PCA
 
 First analyzed is the effect of the number of principal components used
-on the variance captured by the reduced dimensional data. Figure
-<a href="#fig:pca_variance" data-reference-type="ref"
-data-reference="fig:pca_variance">1</a> shows that increasing the number
+on the variance captured by the reduced dimensional data. Figure Below shows that increasing the number
 of principal components used leads to a higher percentage of variance
 explained by the reduced dimensional data. For example, using 100
 principal components captures more than 85% of the variance in the data.
@@ -127,7 +127,7 @@ components exceed 200.
 
 <figure>
 <img src="plot_variance_explained.png" id="fig:pca_variance"
-style="width:70.0%"
+style="width:100.0%"
 alt="Percentage of variance explained by the reduced dimensional data with respect to the number of principal components used for PCA" />
 <figcaption aria-hidden="true">Percentage of variance explained by the
 reduced dimensional data with respect to the number of principal
@@ -139,24 +139,18 @@ components used for PCA</figcaption>
   
 Next, In the implementation, trained SVM on the original data and the
 reduced dimensional data obtained from PCA, normalized between -1 and 1
-using different numbers of principal components. Figure
-<a href="#fig:pca_svm_metrics" data-reference-type="ref"
-data-reference="fig:pca_svm_metrics">[fig:pca_svm_metrics]</a> shows the
+using different numbers of principal components. Figure below shows the
 performance metrics of SVM on the test set with respect to the number of
 principal components used.  
   
 We observe that using PCA to reduce the dimensionality of the data leads
 to a significant improvement in the performance of SVM in terms of
-training efforts. From the graphs in Figure
-<a href="#fig:pca_svm_acuracy" data-reference-type="ref"
-data-reference="fig:pca_svm_acuracy">2</a> we can easily observe that
+training efforts. From the graphs in Figure below we can easily observe that
 using 50 principal components leads to almost the same percentage of
 accuracy, precision, recall, and F1 score compared to using the original
-data performance given in Figure
-<a href="#fig:svm_metrics" data-reference-type="ref"
-data-reference="fig:svm_metrics">6</a>.
+data performance given in Bar plot.
 
-<figure>
+<!-- <figure>
 <img src="plot_acc_0.0001_500000_10.0.png" id="fig:pca_svm_acuracy"
 alt="Accuracy" />
 <figcaption aria-hidden="true">Accuracy</figcaption>
@@ -178,15 +172,17 @@ alt="Recall" />
 <img src="plot_F1_0.0001_500000_10.0.png" id="fig:pca_svm_f1"
 alt="F1 Score" />
 <figcaption aria-hidden="true">F1 Score</figcaption>
-</figure>
+</figure> -->
+
+|         |         |
+|:-------:|:-------:|
+| ![Accuracy](plot_acc_0.0001_500000_10.0.png) | ![Precision](plot_pre_0.0001_500000_10.0.png) |
+| ![Recall](plot_rec_0.0001_500000_10.0.png) | ![F1 Score](plot_F1_0.0001_500000_10.0.png) |
+
 
   
-By training SVM on the original data without using PCA. Figure
-<a href="#fig:svm_metrics" data-reference-type="ref"
-data-reference="fig:svm_metrics">6</a> shows the performance metrics of
-SVM on the test set. Figure
-<a href="#fig:svm_metrics" data-reference-type="ref"
-data-reference="fig:svm_metrics">6</a> observed that SVM achieves an
+By training SVM on the original data without using PCA. Figure below shows the performance metrics of
+SVM on the test set. It is observed that SVM achieves an
 accuracy of about 92%, which is almost the same as the accuracy achieved
 by SVM with PCA. This indicates that reducing the dimensionality of the
 data using PCA can help improve the performance of SVM in training
